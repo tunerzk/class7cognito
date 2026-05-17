@@ -117,7 +117,7 @@ Use AWS CLI:
         aws cognito-idp initiate-auth \
           --auth-flow USER_PASSWORD_AUTH \
           --client-id <CLIENT_ID> \
-          --auth-parameters USERNAME=student1,PASSWORD=YourPassword
+          --auth-parameters USERNAME=student1,PASSWORD=YourPassword,SECRET_HASH=
 
 If MFA is required → challenge returned
 
