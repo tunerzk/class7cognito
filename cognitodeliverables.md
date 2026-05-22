@@ -215,13 +215,38 @@ With Token -->
 
 Task 9 — Verify Behavior
 
-1. Did Lambda run when no token?
-2. Where was request blocked?
-3. What changed in event?
+1. Did Lambda run when no token? Lambda did not run when you made a request without a token. API Gateway intercepted the request before it ever reached your authorizer or your backend Lambda. Because the route was configured with a Lambda Authorizer, API Gateway first checks for the Authorization header. When it’s missing, API Gateway immediately returns 401 Unauthorized and never invokes your authorizer function or your actual Lambda handler. This is expected behavior and confirms your security layer is working.
+
+2. Where was request blocked? The request was blocked inside API Gateway, specifically at the authorizer stage. The request never reached your Lambda Authorizer and never reached your backend Lambda. API Gateway acted as the gatekeeper and stopped the request at the edge.
+ 
+3. What changed in event? Once I added the Authorization header with a valid Cognito AccessToken, the event passed to your Lambda Authorizer changed dramatically. Instead of being empty or missing, the event now included:
+type: TOKEN
+authorizationToken: <your JWT>
+methodArn: arn:aws:execute-api:...
+This allowed my authorizer to decode the JWT, validate it, and return an IAM policy. After that, the backend Lambda received a normal API Gateway event and executed successfully. The presence of the token is what unlocked the entire chain.
 
 Final Explanation
 
-    What Cognito does?
-    What API Gateway does?
-    What MFA adds?
-    Why AccessToken matters?
+What Cognito does? Cognito is your identity provider. It handles:
+-User accounts
+-Passwords
+-MFA
+-Login flows
+-Token generation (AccessToken, IdToken, RefreshToken)
+Its job is to prove who the user is and issue a signed JWT that API Gateway and your authorizer can trust. Cognito does not run your API — it only authenticates users and produces tokens.
+
+What API Gateway does? API Gateway is the traffic cop in front of your Lambda functions. It decides:
+Whether the request is allowed
+Whether the token is present
+Whether the token is valid (via your authorizer)
+Whether to forward the request to Lambda
+API Gateway enforces your security rules before your Lambda ever runs. It is the gatekeeper that protects your backend from unauthorized access.
+
+What MFA adds? MFA adds a second factor to the login process, making it much harder for anyone to break into an account even if they know the password. This ensures that only the real user — with the authenticator app — can log in. It dramatically increases security with minimal friction.
+
+Why AccessToken matters? The AccessToken is the key that unlocks your API. It proves:
+The user is authenticated
+The token was issued by your Cognito User Pool
+The token has not expired
+The signature is valid
+API Gateway and your Lambda Authorizer rely on this token to decide whether to allow or deny the request. Without the AccessToken, the request is blocked. With it, the request is allowed and your Lambda runs.
