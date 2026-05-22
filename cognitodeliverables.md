@@ -108,6 +108,13 @@ If TOTP:
         Google Authenticator
         or Microsoft Authenticator
 
+ A secret hash is only used when your Cognito App Client has a client secret enabled.
+You would use it only when:
+--You have a confidential client (server‑side app, backend service, etc.)
+--You want to prevent someone from abusing your App Client ID
+--You want Cognito to require a second factor (the secret) during authentication
+--You do NOT use a secret hash for browser apps, mobile apps, or anything running on the client side.
+
 
 Task 4 — Get JWT Token (CLI Method)
 This isn't easy. Let's go slow.
