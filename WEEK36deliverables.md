@@ -163,6 +163,8 @@ You get:
             "RefreshToken": "..."
           }
         }
+<img width="1313" height="434" alt="cognitoresults2" src="https://github.com/user-attachments/assets/ae0e485f-46c2-4fd3-9460-d6895b600f6a" />
+ 
 
 Use: AccessToken
 
