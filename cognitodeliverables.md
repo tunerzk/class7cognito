@@ -118,6 +118,8 @@ Use AWS CLI:
           --auth-flow USER_PASSWORD_AUTH \
           --client-id <CLIENT_ID> \
           --auth-parameters USERNAME=student1,PASSWORD=YourPassword,SECRET_HASH=
+<img width="1036" height="265" alt="image" src="https://github.com/user-attachments/assets/e7ca7b81-a0ef-4fa6-b48f-8379827f33ce" />
+
 
 If MFA is required → challenge returned
 
@@ -128,6 +130,8 @@ Then run:
           --challenge-name SMS_MFA \
           --challenge-responses USERNAME=student1,SMS_MFA_CODE=123456 \
           --session <SESSION>
+<img width="1538" height="387" alt="image" src="https://github.com/user-attachments/assets/e7b0d39e-c373-4074-95c6-c233a15c26e7" />
+
 
 Result:
 
@@ -169,6 +173,8 @@ Task 8 — Test
 Without Token ---> 
 
         curl https://<api>/prod/python 
+<img width="1378" height="167" alt="image" src="https://github.com/user-attachments/assets/800f457c-da92-4c70-acf2-511853ded9e6" />
+
 
  --> 401 Unauthorized
  
@@ -177,8 +183,9 @@ With Token -->
 
         curl https://<api>/prod/python \
           -H "Authorization: <ACCESS_TOKEN>" 
-
-→ 200 OK
+<img width="1508" height="178" alt="image" src="https://github.com/user-attachments/assets/32bf7ee7-41f5-4c86-b63f-ab29715ef719" />
+  
+        → 200 OK
 
 
 Task 9 — Verify Behavior
