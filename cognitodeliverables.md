@@ -13,6 +13,8 @@ Students will:
     Enforce MFA
     Create and authenticate a user
     Use the JWT to call your REST API
+   <img width="1339" height="474" alt="image" src="https://github.com/user-attachments/assets/4d4cf09d-db52-468a-a35b-73eda1516bab" />
+ 
 
 Updated Flow: Client → WAF → API Gateway (Cognito Authorizer) → Lambda
 
@@ -75,6 +77,8 @@ Disable: ----> ❌ Client secret
 Why? Client secret complicates API usage. We keep it simple.
 
 Click Create
+<img width="1211" height="525" alt="image" src="https://github.com/user-attachments/assets/78e535a2-e601-4aad-8deb-e6f923d6bfb5" />
+
 
 Task 2 — Create a User
 
@@ -91,6 +95,8 @@ Fill:
 
 Set password manually: --->  Permanent password
 “We are skipping email verification to move faster. We will return to it later"
+<img width="1397" height="317" alt="image" src="https://github.com/user-attachments/assets/66945e7f-91ed-4718-a62d-f3c4b68695b0" />
+
 
 Task 3 — Enable MFA for User
 
@@ -102,11 +108,15 @@ Inside User:
         ✔ Choose:
 
 SMS OR Authenticator app
+<img width="894" height="695" alt="cogmfasetup" src="https://github.com/user-attachments/assets/a3f004d3-5074-45f6-8715-af5850c142e1" />
+
 
 If TOTP:
     Scan QR code with:
         Google Authenticator
         or Microsoft Authenticator
+<img width="1152" height="584" alt="cogsigninapprove" src="https://github.com/user-attachments/assets/e7a2ed45-7a86-40a6-a43e-9b78f344c48b" />
+
 
  A secret hash is only used when your Cognito App Client has a client secret enabled.
 You would use it only when:
@@ -114,6 +124,8 @@ You would use it only when:
 --You want to prevent someone from abusing your App Client ID
 --You want Cognito to require a second factor (the secret) during authentication
 --You do NOT use a secret hash for browser apps, mobile apps, or anything running on the client side.
+<img width="1196" height="392" alt="cognitosecretproof" src="https://github.com/user-attachments/assets/13d51d25-07de-46bf-85af-7ccb5fddd45d" />
+
 
 
 Task 4 — Get JWT Token (CLI Method)
@@ -155,6 +167,8 @@ You get:
 Use: AccessToken
 
 Task 5 — Create API Gateway Authorizer
+<img width="1407" height="300" alt="image" src="https://github.com/user-attachments/assets/956113ba-3b11-4350-8b45-fdf366fac85b" />
+
 
 Go to API Gateway (REST API)--> Authorizers → Create New ---> Type: Cognito ---> 
 
@@ -165,10 +179,14 @@ Configure:
         Token Source: Authorization
 
 Task 6 — Attach Authorizer to Methods
+<img width="792" height="570" alt="image" src="https://github.com/user-attachments/assets/56352964-a05f-47ee-afb2-7e55bf2077ad" />
+
 
 For /python and For /node:
 
     Method Request --> Authorization: Cognito Authorizer
+<img width="1065" height="501" alt="image" src="https://github.com/user-attachments/assets/126a4785-f32d-4164-ad50-a0e426a3e909" />
+
  
 Task 7 — Deploy API (Again!)
 
