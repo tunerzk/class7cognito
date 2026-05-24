@@ -10,7 +10,7 @@ import json
 # Configuration
 # =========================
 
-CLIENT_ID = "REPLACE_WITH_CLIENT_ID"
+CLIENT_ID = "4mg0u7fffbdi284mjavl7p59l"
 REGION = "us-east-1"
 
 # =========================
